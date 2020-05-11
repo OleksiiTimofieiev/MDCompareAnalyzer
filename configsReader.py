@@ -25,12 +25,6 @@ class ConfigsReader:
 
         self.writeResultsToFile = self.data['writeResultsToFile']
         self.writeResultsToExcel = self.data['writeResultsToExcel']
-        # print(self.acceptedMismatch)
-        # print(self.acceptedMismatch[0][0])
-        # print(self.acceptedMismatch[0][1])
-        # print(self.acceptedMismatch[0][2])
-        # print(self.writeResultsToFile)
-        # print(self.writeResultsToExcel)
 
     def getAcceptableMismatchList(self):
         return self.acceptedMismatch;
