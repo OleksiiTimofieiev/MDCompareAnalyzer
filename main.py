@@ -3,10 +3,12 @@ import sys
 from collections import deque
 
 from configsReader import ConfigsReader
+from fileReader import FileReader
 
 ConfigsReader = ConfigsReader()
 
 AcceptableMismatchList = deque(ConfigsReader.getAcceptableMismatchList())
+FileReader = FileReader("4822.xls")
 
 # print(AcceptableMismatchList)
 
