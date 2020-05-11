@@ -1,0 +1,45 @@
++ json for acceptable mismatch
++ json for write results to file
++ json for write results to excel
+
+! do not keep data in the runtime
+? command pattern:
+
+in loop
+
++ read json in constructor/during start
+- select FID, types of mismatch, show all mismatches according to type, show all RICs with this mismatch and values, page
+- show FID, type of present mismatch
+
+
+
+
+
+
+
+
+
+
+- file in command line
+- all diff with all criteria, types of mismatch, RIC
+- options for fids;
+- one or all differencies;
+- check the type of mismatch
+- sort types of mismatches for FID
+- write results to file
+- menu func
+- выгрузить все по рику
+- progressbar / continue
+- print necessary FIDs according to RIC
+- add exception/exclude exception un runtime or fid
+- types of errors
+- statistics and vizualization
+-- usage
+- RIC, FID, TYPE of mismatches
+- enum for the fields
+- if all acceptable, add to exceptions
+- write all data for RIC in separate file
+
+pythpn -> pip3 -> excel lib
+
+filter list of sheets on start => maybe cacch them to json

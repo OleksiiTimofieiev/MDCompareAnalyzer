@@ -1,0 +1,17 @@
+{
+	"writeResultsToFile" : true,
+	"writeResultsToExcel" : false,
+	"fileName" : "default",
+	"generalAcceptableMismatch" :
+	[
+		{ "FID" : "TEST", "SRC1": "SRC1", "SRC2": "SRC2" },
+		{ "FID" : "TEST", "SRC1": "SRC1", "SRC2": "SRC2" }
+
+	],
+	"specializedAcceptableMismatch" :
+	[
+		{ "FID" : "TEST", "SRC1": "SRC1", "SRC2": "SRC2" },
+		{ "FID" : "TEST", "SRC1": "SRC1", "SRC2": "SRC2" }
+
+	]
+}
