@@ -25,3 +25,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+# _, a, b = sys.argv
+# for filename
+# except Exeptioin as e:
+# 	print(type(e))
