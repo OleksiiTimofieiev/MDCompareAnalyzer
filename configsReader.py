@@ -40,13 +40,3 @@ class ConfigsReader:
 
     def getWriteResultsToExcel(self):
         return self.writeResultsToExcel;
-
-# ConfigsReader = ConfigsReader()
-#
-# print(ConfigsReader.getWriteResultsToFile())
-# print(ConfigsReader.getWriteResultsToExcel())
-# print(ConfigsReader.getAcceptableMismatchList())
-#
-# deq = deque(ConfigsReader.getAcceptableMismatchList())
-
-# print(deq)

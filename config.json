@@ -1,5 +1,5 @@
 {
-	"writeResultsToFile" : true,
+	"writeResultsToFile" : false,
 	"writeResultsToExcel" : false,
 	"fileName" : "default",
 	"generalAcceptableMismatch" :
