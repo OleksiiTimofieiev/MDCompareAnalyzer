@@ -13,7 +13,6 @@ import xlrd
 import pandas as pd
 import openpyxl
 import math
-from tqdm import tqdm_gui
 
 
 # def convertTuple(tup):
@@ -28,14 +27,14 @@ class FileReader:
     def __init__(self, filenameExcel):
         # create a list with sheet numbers you want to process
 
-
-        wb = openpyxl.load_workbook('4822_1.xlsx', read_only=True)
-        for x in wb.sheetnames:
+        self.wb = openpyxl.load_workbook('4822_1.xlsx', read_only=True)
+        for x in self.wb.sheetnames:
             if x.find("Vertical") == 0:
                 self.sheets.append(x)
         for x in self.sheets:
-            self.row_quantity += wb[x].max_row
+            self.row_quantity += self.wb[x].max_row
         # print(self.row_quantity)
+
 
         b = 0
 
@@ -45,28 +44,29 @@ class FileReader:
         # # https://github.com/rsalmei/alive-progress
         print("Sheets to be processed -> " + str(len(self.sheets)))
 
+        # stop = 0
         for sheet in self.sheets:
+            # if stop == 1:
+            #     break
             # print(sheet)
-            data = wb[sheet].rows
+
+            data = self.wb[sheet].rows
             # print("sheet -" + sheet)
 
-            toolbar_width = math.ceil(wb[sheet].max_row / 40000)
+            toolbar_width = math.ceil(self.wb[sheet].max_row / 40000)
             print(toolbar_width)
 
             # setup toolbar
 
-
             # for i in range(toolbar_width):
 
-                # update the bar
-
+            # update the bar
 
             b = 0
 
-
             # print(sheet + " rows quantity:\n" +  + " items")
 
-            sys.stdout.write("[%s] rows to be processed =>%s" % (" " * (int(toolbar_width)), str(wb[sheet].max_row)))
+            sys.stdout.write("[%s] rows to be processed =>%s" % (" " * (int(toolbar_width)), str(self.wb[sheet].max_row)))
             sys.stdout.flush()
             sys.stdout.write("\b" * (31 + int(toolbar_width + 1)))  # return to start of line, after '['
 
@@ -93,9 +93,8 @@ class FileReader:
                     sys.stdout.flush()
                 b = b + 1
             sys.stdout.write("]\n")  # this ends the progress bar
-
-
-
+            # stop = stop + 1
+        self.wb.close()
             # print(b)
             #     bar.next()
             # bar.finish()
