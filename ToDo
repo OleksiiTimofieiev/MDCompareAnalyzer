@@ -3,11 +3,13 @@
 + json for write results to excel
 
 ! do not keep data in the runtime
+! add concurrency => array of different containers
 ? command pattern:
 
 in loop
 
 + read json in constructor/during start
+- load not all sheets as option
 - select FID, types of mismatch, show all mismatches according to type, show all RICs with this mismatch and values, page
 - show FID, type of present mismatch
 

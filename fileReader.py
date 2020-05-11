@@ -12,7 +12,8 @@ import sys
 import xlrd
 import pandas as pd
 import openpyxl
-from tqdm import tqdm
+import math
+from tqdm import tqdm_gui
 
 
 # def convertTuple(tup):
@@ -26,6 +27,7 @@ class FileReader:
 
     def __init__(self, filenameExcel):
         # create a list with sheet numbers you want to process
+
 
         wb = openpyxl.load_workbook('4822_1.xlsx', read_only=True)
         for x in wb.sheetnames:
@@ -41,14 +43,34 @@ class FileReader:
 
         # bar = IncrementalBar('Countdown', max=100000)
         # # https://github.com/rsalmei/alive-progress
+        print("Sheets to be processed -> " + str(len(self.sheets)))
+
         for sheet in self.sheets:
             # print(sheet)
             data = wb[sheet].rows
             # print("sheet -" + sheet)
 
-            b = wb[sheet].max_row
+            toolbar_width = math.ceil(wb[sheet].max_row / 40000)
+            print(toolbar_width)
 
-            for row in tqdm(data):
+            # setup toolbar
+
+
+            # for i in range(toolbar_width):
+
+                # update the bar
+
+
+            b = 0
+
+
+            # print(sheet + " rows quantity:\n" +  + " items")
+
+            sys.stdout.write("[%s] rows to be processed =>%s" % (" " * (int(toolbar_width)), str(wb[sheet].max_row)))
+            sys.stdout.flush()
+            sys.stdout.write("\b" * (31 + int(toolbar_width + 1)))  # return to start of line, after '['
+
+            for row in data:
                 l = list(row)
                 x = ""
                 # print(len(l))
@@ -59,11 +81,20 @@ class FileReader:
                         x += (str(l[i].value) + ',')
                 # print(x)
                 # print(b)
+
                 z.append(x)
+
                 # if b == 100000:
                 #     # print("woohoo")
                 #     break
-                b = b - 1
+
+                if b % 40000 == 0:
+                    sys.stdout.write("#")
+                    sys.stdout.flush()
+                b = b + 1
+            sys.stdout.write("]\n")  # this ends the progress bar
+
+
 
             # print(b)
             #     bar.next()
