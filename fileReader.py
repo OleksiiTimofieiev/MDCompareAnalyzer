@@ -48,7 +48,7 @@ class FileReader:
                 "[%s] rows to be processed => %s" % (" " * (int(toolbar_width)), str(self.wb[sheet].max_row)))
             sys.stdout.flush()
             sys.stdout.write("\b" * (32 + int(toolbar_width)))  # return to start of line, after '['
-
+            test = 0
             for row in data:
                 list_row = list(row)
                 list_row_str = ""
@@ -63,6 +63,9 @@ class FileReader:
                 if counter_for_progress_bar % 40000 == 0:
                     sys.stdout.write("#")
                     sys.stdout.flush()
+                test = test + 1
+                if test == 100000:
+                    break
                 counter_for_progress_bar = counter_for_progress_bar + 1
             sys.stdout.write("]\n")  # this ends the progress bar
         self.wb.close()

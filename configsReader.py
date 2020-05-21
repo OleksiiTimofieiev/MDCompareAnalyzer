@@ -16,7 +16,7 @@ class ConfigsReader:
         f.close()
 
         for x in self.data['generalAcceptableMismatch']:
-            sublist = [x['FID'], x['SRC1'], x['SRC2']]
+            sublist = [x['SRC1'], x['SRC2']]
             self.acceptedMismatch.append(sublist)
 
         for x in self.data['specializedAcceptableMismatch']:

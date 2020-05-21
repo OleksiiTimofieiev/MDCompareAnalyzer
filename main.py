@@ -4,6 +4,7 @@ from collections import deque
 
 from configsReader import ConfigsReader
 from fileReader import FileReader
+from Analyzer import Analyzer
 
 
 # print(AcceptableMismatchList)
@@ -18,21 +19,13 @@ def main(filename):
     else:
         ConfigsReaderVar = ConfigsReader()
         AcceptableMismatchList = deque(ConfigsReaderVar.getAcceptableMismatchList())
+        print(AcceptableMismatchList[0])
         FileReaderVar = FileReader(filename)
         Data_to_analyze = FileReaderVar.getDataForAnalysis()
+        AnalyzerVar = Analyzer()
 
-        list_of_fids_with_mismatch = []
+        AnalyzerVar.getListOfFIDWithMismatch(Data_to_analyze, AcceptableMismatchList)
 
-        for x in Data_to_analyze:
-            lineToAnalyze = x.split(",")
-            # print(x + '\n')
-            if lineToAnalyze[6] == '!':
-                # print(lineToAnalyze[1] + " " + lineToAnalyze[3] + " " + lineToAnalyze[4] + " " + lineToAnalyze[5] + " " + lineToAnalyze[6])
-                if lineToAnalyze[3] not in list_of_fids_with_mismatch:
-                    list_of_fids_with_mismatch.append(lineToAnalyze[3])
-
-        for x in list_of_fids_with_mismatch:
-            print(x + '\n')
         print("finished")
 
         while 1:
