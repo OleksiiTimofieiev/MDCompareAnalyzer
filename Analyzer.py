@@ -1,8 +1,22 @@
+import re
+
 RIC = 1
 FID = 3
 IDN = 4
 ERT = 5
 FLAG = 6
+
+def checkIfFormatting(ERT, IDN):
+    try:
+        ERT_local = re.sub('[""]', '', ERT)
+        IDN_local = re.sub('[""]', '', IDN)
+
+        if IDN != 'null' and ERT != 'null':
+            if ERT != IDN and float(ERT_local) == float(IDN_local):
+                return True
+    except:
+        print(ERT + " " + IDN)
+        return False
 
 
 class Analyzer:
@@ -17,12 +31,13 @@ class Analyzer:
             if lineToAnalyze[FLAG] == '!' and lineToAnalyze[FID] not in FIDsNotToBeAnalyzed:
                 if lineToAnalyze[IDN] != AcceptableGeneralMismatch[0][0] and lineToAnalyze[ERT] != \
                         AcceptableGeneralMismatch[0][1]:
-                    if lineToAnalyze[FID] not in self.list_of_fids_with_mismatch:
-                        self.list_of_fids_with_mismatch.append(lineToAnalyze[FID])
-                        self.dictVar[lineToAnalyze[FID]] = []
+                    if not checkIfFormatting(lineToAnalyze[IDN], lineToAnalyze[ERT]):
+                        if lineToAnalyze[FID] not in self.list_of_fids_with_mismatch:
+                            self.list_of_fids_with_mismatch.append(lineToAnalyze[FID])
+                            self.dictVar[lineToAnalyze[FID]] = []
 
-                    sublist = [lineToAnalyze[RIC], lineToAnalyze[IDN], lineToAnalyze[ERT]]
-                    self.dictVar[lineToAnalyze[FID]].append(sublist)
+                        sublist = [lineToAnalyze[RIC], lineToAnalyze[IDN], lineToAnalyze[ERT]]
+                        self.dictVar[lineToAnalyze[FID]].append(sublist)
 
     def getListOfFIDWithMismatch(self):
         for MismatchedFID in self.list_of_fids_with_mismatch:
