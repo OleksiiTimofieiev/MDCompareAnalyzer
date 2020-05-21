@@ -19,6 +19,8 @@ def main(filename):
         ConfigsReaderVar = ConfigsReader()
         AcceptableMismatchList = deque(ConfigsReaderVar.getAcceptableMismatchList())
         FileReaderVar = FileReader(filename)
+        Data_to_analyze = FileReaderVar.getDataForAnalysis()
+
 
         while 1:
             continue
