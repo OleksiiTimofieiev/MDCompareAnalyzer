@@ -5,14 +5,10 @@ from collections import deque
 from configsReader import ConfigsReader
 from fileReader import FileReader
 
-ConfigsReader = ConfigsReader()
-
-AcceptableMismatchList = deque(ConfigsReader.getAcceptableMismatchList())
-FileReader = FileReader("4822.xls")
 
 # print(AcceptableMismatchList)
 
-def main():
+def main(filename):
     if len(sys.argv) == 1:
         print("Usage details: please add filename.")
         sys.exit
@@ -20,11 +16,16 @@ def main():
         print("Usage details: only on file can be selected.")
         sys.exit
     else:
+        ConfigsReaderVar = ConfigsReader()
+        AcceptableMismatchList = deque(ConfigsReaderVar.getAcceptableMismatchList())
+        FileReaderVar = FileReader(filename)
+
         while 1:
             continue
 
+
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1])
 # _, a, b = sys.argv
 # for filename
 # except Exeptioin as e:
