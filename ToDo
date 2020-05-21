@@ -1,26 +1,26 @@
-+ json for acceptable mismatch
-+ json for write results to file
-+ json for write results to excel
++ configs via json for acceptable mismatch
++ configs via json to write results to file
++ configs via json to write results to excel
 
-! do not keep data in the runtime
-! add concurrency => array of different containers
-? command pattern:
+! think about concurrency => array of different containers for parsing
+! menu in loop
 
-in loop
-
-+ read json in constructor/during start
+second iteration:
 - load not all sheets as option
-- select FID, types of mismatch, show all mismatches according to type, show all RICs with this mismatch and values, page
-- show FID, type of present mismatch
+
++ read json in constructor(during start)
++ file for analysis in command line
++ usage line
+- no spaces in the name of file, if exception during open file by openpxl ->
+- menu func
+- select FIDs with not acceptable mismatches
 
 ""
 "asdfasdf "
 
 соответствие риков = тождественны ли множества риков
-
 тип несоответствия в файл/на консоль
 
-1. название файла -> EOD
 
 
 
@@ -29,26 +29,19 @@ in loop
 
 
 
-- file in command line
+
 - all diff with all criteria, types of mismatch, RIC
 - options for fids;
 - one or all differencies;
 - check the type of mismatch
 - sort types of mismatches for FID
 - write results to file
-- menu func
 - выгрузить все по рику
-- progressbar / continue
 - print necessary FIDs according to RIC
 - add exception/exclude exception un runtime or fid
 - types of errors
 - statistics and vizualization
--- usage
-- RIC, FID, TYPE of mismatches
 - enum for the fields
 - if all acceptable, add to exceptions
 - write all data for RIC in separate file
 
-pythpn -> pip3 -> excel lib
-
-filter list of sheets on start => maybe cacch them to json

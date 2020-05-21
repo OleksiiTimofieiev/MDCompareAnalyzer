@@ -21,6 +21,8 @@ def main(filename):
         FileReaderVar = FileReader(filename)
         Data_to_analyze = FileReaderVar.getDataForAnalysis()
 
+        for x in Data_to_analyze:
+            print(x + '\n')
 
         while 1:
             continue
