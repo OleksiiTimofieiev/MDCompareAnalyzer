@@ -8,15 +8,14 @@ TODO:
 + show RICs and mismatches
 
 - файл/на консоль
-
-- formatting acceptance
+- formatting acceptance. if doubles are equal but string are different
 - spaces in the end acceptance
 
-- no spaces in the name of file, if exception during open file by openpxl ->
+
 
 -------------------------------------------------------------------------------------------------------------
 
 - statistics and vizualization
 - think about concurrency => array of different containers for parsing
-
+- no spaces in the name of file, if exception during open file by openpxl ->
 

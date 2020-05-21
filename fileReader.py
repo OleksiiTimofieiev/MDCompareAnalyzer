@@ -7,6 +7,7 @@ import math
 class FileReader:
     sheets = []
     row_quantity = 0
+    counter_for_progress_bar_limiter = 40000
 
     def __init__(self, filenameExcel):
         self.wb = openpyxl.load_workbook(filenameExcel, read_only=True)
@@ -15,19 +16,16 @@ class FileReader:
                 self.sheets.append(x)
         for x in self.sheets:
             self.row_quantity += self.wb[x].max_row
-        # print(self.row_quantity)
 
         self.data_to_analyze = []
-
-        # print("Sheets to be processed -> " + str(len(self.sheets)))
 
         for sheet in self.sheets:
             data = self.wb[sheet].rows
 
-            toolbar_width = math.ceil(self.wb[sheet].max_row / 40000)
-            # print(toolbar_width)
+            toolbar_width = math.ceil(self.wb[sheet].max_row / self.counter_for_progress_bar_limiter)
+
             counter_for_progress_bar = 0
-            # print(sheet + " rows quantity:\n" +  + " items")
+
             sys.stdout.write(
                 "[%s] rows to be processed => %s" % (" " * (int(toolbar_width)), str(self.wb[sheet].max_row)))
             sys.stdout.flush()
@@ -44,7 +42,7 @@ class FileReader:
                         list_row_str += (str(list_row[i].value) + ',')
                 self.data_to_analyze.append(list_row_str)
 
-                if counter_for_progress_bar % 40000 == 0:
+                if counter_for_progress_bar % self.counter_for_progress_bar_limiter == 0:
                     sys.stdout.write("#")
                     sys.stdout.flush()
                 test = test + 1
