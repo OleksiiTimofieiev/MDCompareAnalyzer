@@ -20,12 +20,11 @@ def main(filename):
         print("Usage details: only on file can be selected.")
         sys.exit
     else:
-        ConfigsReaderVar = ConfigsReader()
-        AcceptableGeneralMismatchListVar = deque(ConfigsReaderVar.getAcceptableGeneralMismatchList())
-        AcceptableGeneralSpecializedListVar = deque(ConfigsReaderVar.getAcceptableSpecialysedMismatchList())
+        AcceptableGeneralMismatchListVar = deque(ConfigsReader().getAcceptableGeneralMismatchList())
+        AcceptableGeneralSpecializedListVar = deque(ConfigsReader().getAcceptableSpecialysedMismatchList())
+
         print(AcceptableGeneralSpecializedListVar)
-        FileReaderVar = FileReader(filename)
-        Data_to_analyze = FileReaderVar.getDataForAnalysis()
+        Data_to_analyze = FileReader(filename).getDataForAnalysis()
 
         SwitcherVar = Switcher(Data_to_analyze, AcceptableGeneralMismatchListVar)
 
@@ -33,7 +32,6 @@ def main(filename):
             menu()
             option = input()
             SwitcherVar.execute_option(option)
-
             continue
 
 
