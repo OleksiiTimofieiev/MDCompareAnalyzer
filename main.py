@@ -10,7 +10,7 @@ from Analyzer import Analyzer, Switcher
 ConfigsReaderVar = ConfigsReader()
 
 def menu():
-    print("\nPlease,select an option: \n1. Print list of FIDs with problems;\n2. Stop execution of the program\n")
+    print("\nPlease,select an option: \n1. Print list of FIDs with problems;\n2. See diff for the specific FID;\n3. Stop execution of the program;\n")
 
 def main(filename):
     if len(sys.argv) == 1:
@@ -20,12 +20,9 @@ def main(filename):
         print("Usage details: only on file can be selected.")
         sys.exit
     else:
-        # AcceptableGeneralMismatchListVar =
         AcceptableGeneralSpecializedListVar = deque(ConfigsReaderVar.getAcceptableSpecialysedMismatchList())
-        # FIDsNotToBeAnalyzed =
 
         print(AcceptableGeneralSpecializedListVar)
-        # Data_to_analyze =
 
         SwitcherVar = Switcher(
             FileReader(filename).getDataForAnalysis(),
