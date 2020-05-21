@@ -15,12 +15,12 @@ def checkIfFormatting(ERT, IDN):
             if ERT != IDN and float(ERT_local) == float(IDN_local):
                 return True
     except:
-        print(ERT + " " + IDN)
         return False
 
 
 class Analyzer:
     dictVar = {}
+    dictVarQuantityOfMismatches = {}
 
     def __init__(self, Data_to_analyze, AcceptableGeneralMismatch, FIDsNotToBeAnalyzed):
         self.list_of_fids_with_mismatch = []
@@ -35,13 +35,15 @@ class Analyzer:
                         if lineToAnalyze[FID] not in self.list_of_fids_with_mismatch:
                             self.list_of_fids_with_mismatch.append(lineToAnalyze[FID])
                             self.dictVar[lineToAnalyze[FID]] = []
+                            self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = 0
 
                         sublist = [lineToAnalyze[RIC], lineToAnalyze[IDN], lineToAnalyze[ERT]]
                         self.dictVar[lineToAnalyze[FID]].append(sublist)
+                        self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] + 1
 
     def getListOfFIDWithMismatch(self):
         for MismatchedFID in self.list_of_fids_with_mismatch:
-            print(MismatchedFID)
+            print(MismatchedFID + " - " + str(self.dictVarQuantityOfMismatches[MismatchedFID]))
 
     def getDetailsOnMismatchesForFID(self, SpecifiedFID):
         for MismatchedUpdate in self.dictVar[str(SpecifiedFID)]:

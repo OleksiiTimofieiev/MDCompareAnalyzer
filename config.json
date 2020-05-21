@@ -6,7 +6,10 @@
 	[
 		"DDS_DSO_ID",
 		"DSPLY_NAME",
-		"SPS_SP_RIC"
+		"SPS_SP_RIC",
+		"HDR_PERMISSION_INFO",
+		"NEWS_TIME",
+		"CONTEXT_ID"
 	],
 	"generalAcceptableMismatch" :
 	[

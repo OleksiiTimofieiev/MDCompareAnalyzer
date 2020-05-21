@@ -6,12 +6,12 @@ TODO:
 + usage line
 + FIDs not to be analyzed
 + show RICs and mismatches
++ formatting acceptance. if float === doubles in python are equal but string are different
++ quantity of diffs
+- spaces in the end acceptance
+- 0.01 diff
 
 - файл/на консоль
-- formatting acceptance. if doubles are equal but string are different
-- spaces in the end acceptance
-
-
 
 -------------------------------------------------------------------------------------------------------------
 

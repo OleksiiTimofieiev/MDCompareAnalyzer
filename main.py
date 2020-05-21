@@ -29,6 +29,7 @@ def main(filename):
         )
 
         while 1:
+            #TODO: exception for main
             menu()
             option = input()
             AnalyzerWrapperVar.execute_option(option)
