@@ -9,13 +9,14 @@ TODO:
 + formatting acceptance. if float === doubles in python are equal but string are different
 + quantity of diffs
 + spaces in the end acceptance == if string from the start is found and remaing length is only spaces
++ set as fixed -> delete from dictionary
 
 - файл/на консоль
 
 - no spaces in the name of file, if exception during open file by openpxl ->
 - main in options selection
 
-- set as fixed -> delete from dictionary
+
 del d[key]
 
 -------------------------------------------------------------------------------------------------------------
