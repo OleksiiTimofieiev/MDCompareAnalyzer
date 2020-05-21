@@ -4,22 +4,39 @@ IDN = 4
 ERT = 5
 FLAG = 6
 
-
 class Analyzer:
-    def getListOfFIDWithMismatch(self,Data_to_analyze, AcceptableMismatchList):
+    def getListOfFIDWithMismatch(self, Data_to_analyze, AcceptableMismatchList):
         list_of_fids_with_mismatch = []
 
         for row in Data_to_analyze:
             lineToAnalyze = row.split(",")
-            # print(x + '\n')
-            if lineToAnalyze[6] == '!':
-                # print(lineToAnalyze[1] + " " + lineToAnalyze[3] + " " + lineToAnalyze[4] + " " + lineToAnalyze[5] + " " + lineToAnalyze[6])
-                # print(AcceptableMismatchList[0][0])
-                # print(AcceptableMismatchList[0][1])
 
-                if lineToAnalyze[4] != AcceptableMismatchList[0][0] and lineToAnalyze[5] != AcceptableMismatchList[0][1]:
-                    if lineToAnalyze[3] not in list_of_fids_with_mismatch:
-                        list_of_fids_with_mismatch.append(lineToAnalyze[3])
+            if lineToAnalyze[FLAG] == '!':
+                if lineToAnalyze[IDN] != AcceptableMismatchList[0][0] and lineToAnalyze[ERT] != AcceptableMismatchList[0][1]:
+                    if lineToAnalyze[FID] not in list_of_fids_with_mismatch:
+                        list_of_fids_with_mismatch.append(lineToAnalyze[FID])
 
         for x in list_of_fids_with_mismatch:
             print(x)
+
+
+class Switcher(object):
+    AnalyzerVar = Analyzer()
+
+    def __init__(self, Data_to_analyze, AcceptableMismatchList):
+        self.Data_to_analyze = Data_to_analyze
+        self.AcceptableMismatchList = AcceptableMismatchList
+
+    def execute_option(self, argument):
+        method_name = 'option_' + str(argument)
+        method = getattr(self, method_name, lambda: "Invalid month")
+        return method()
+
+    def option_1(self):
+        return self.AnalyzerVar.getListOfFIDWithMismatch(self.Data_to_analyze, self.AcceptableMismatchList)
+
+    def option_2(self):
+        return quit()
+
+    def option_3(self):
+        return "March"

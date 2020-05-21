@@ -6,7 +6,8 @@ from collections import deque
 
 class ConfigsReader:
     fileName = 'config.json'
-    acceptedMismatch = deque()
+    acceptedGeneral = deque()
+    acceptedSpecialized = deque()
     writeResultsToFile = False
     writeResultsToExcel = False
 
@@ -17,17 +18,20 @@ class ConfigsReader:
 
         for x in self.data['generalAcceptableMismatch']:
             sublist = [x['SRC1'], x['SRC2']]
-            self.acceptedMismatch.append(sublist)
+            self.acceptedGeneral.append(sublist)
 
         for x in self.data['specializedAcceptableMismatch']:
             sublist = [x['FID'], x['SRC1'], x['SRC2']]
-            self.acceptedMismatch.append(sublist)
+            self.acceptedSpecialized.append(sublist)
 
         self.writeResultsToFile = self.data['writeResultsToFile']
         self.writeResultsToExcel = self.data['writeResultsToExcel']
 
-    def getAcceptableMismatchList(self):
-        return self.acceptedMismatch;
+    def getAcceptableGeneralMismatchList(self):
+        return self.acceptedGeneral;
+
+    def getAcceptableSpecialysedMismatchList(self):
+        return self.acceptedSpecialized;
 
     def getWriteResultsToFile(self):
         return self.writeResultsToFile;

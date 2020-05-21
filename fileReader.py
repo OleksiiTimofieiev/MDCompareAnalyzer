@@ -1,25 +1,9 @@
 #!/usr/bin/python
 
-from datetime import datetime
-import time
-# from progress.bar import IncrementalBar
-# from progress.bar import Bar
-# from alive_progress import alive_bar
-# from progress.bar import IncrementalBar
-
-import csv
 import sys
-import xlrd
-import pandas as pd
 import openpyxl
 import math
 
-
-# def convertTuple(tup):
-#     str = ''.join(tup)
-#     return str
-
-# startTime = datetime.now()
 class FileReader:
     sheets = []
     row_quantity = 0
@@ -73,17 +57,3 @@ class FileReader:
     def getDataForAnalysis(self):
         return self.data_to_analyze
 
-        # # Opening a file
-        # file1 = open('test', 'w')
-        #
-        # # Writing a string to file
-        # for x in z:
-        #     file1.write(x + '\n')
-        #
-        # # Writing multiple strings
-        # # at a time
-        # # file1.writelines(L)
-        #
-        # # Closing file
-        # file1.close()
-        # # print(z)

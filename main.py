@@ -1,13 +1,16 @@
 #!/usr/bin/python
+
 import sys
 from collections import deque
 
 from configsReader import ConfigsReader
 from fileReader import FileReader
-from Analyzer import Analyzer
+from Analyzer import Analyzer, Switcher
 
 
-# print(AcceptableMismatchList)
+def menu():
+    print("Please,select an option: \n1. Print list of FIDs with problems;\n2. Stop execution of the program\n")
+
 
 def main(filename):
     if len(sys.argv) == 1:
@@ -18,17 +21,19 @@ def main(filename):
         sys.exit
     else:
         ConfigsReaderVar = ConfigsReader()
-        AcceptableMismatchList = deque(ConfigsReaderVar.getAcceptableMismatchList())
-        print(AcceptableMismatchList[0])
+        AcceptableGeneralMismatchListVar = deque(ConfigsReaderVar.getAcceptableGeneralMismatchList())
+        AcceptableGeneralSpecializedListVar = deque(ConfigsReaderVar.getAcceptableSpecialysedMismatchList())
+        print(AcceptableGeneralSpecializedListVar)
         FileReaderVar = FileReader(filename)
         Data_to_analyze = FileReaderVar.getDataForAnalysis()
-        AnalyzerVar = Analyzer()
 
-        AnalyzerVar.getListOfFIDWithMismatch(Data_to_analyze, AcceptableMismatchList)
-
-        print("finished")
+        SwitcherVar = Switcher(Data_to_analyze, AcceptableGeneralMismatchListVar)
 
         while 1:
+            menu()
+            option = input()
+            SwitcherVar.execute_option(option)
+
             continue
 
 
@@ -38,3 +43,18 @@ if __name__ == "__main__":
 # for filename
 # except Exeptioin as e:
 # 	print(type(e))
+
+# # Opening a file
+# file1 = open('test', 'w')
+#
+# # Writing a string to file
+# for x in z:
+#     file1.write(x + '\n')
+#
+# # Writing multiple strings
+# # at a time
+# # file1.writelines(L)
+#
+# # Closing file
+# file1.close()
+# # print(z)
