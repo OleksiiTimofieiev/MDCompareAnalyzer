@@ -52,8 +52,8 @@ class Switcher(object):
 
     def option_2(self):
         try:
-            option = input("Please, enter FID for analysis.\n")
             #TODO: list of available options: 1 - FID, differnt function for convertion
+            option = input("Please, enter FID for analysis.\n")
             return self.AnalyzerVar.getDetailsOnMismatchesForFID(option)
         except:
             print("Please, valid FID from options list should be selected.")
