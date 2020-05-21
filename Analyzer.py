@@ -18,6 +18,12 @@ class Analyzer:
 
         for x in list_of_fids_with_mismatch:
             print(x)
+    #get list for RICs with exceptions
+    # RIC IDN ERT
+    # use tuple
+    # FID# RIC IDN ERT
+    # FID - key, RIC IDN ERT
+    # write to file
 
 
 class Switcher(object):
