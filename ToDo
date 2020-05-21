@@ -8,14 +8,19 @@ TODO:
 + show RICs and mismatches
 + formatting acceptance. if float === doubles in python are equal but string are different
 + quantity of diffs
-- spaces in the end acceptance
-- 0.01 diff
+- spaces in the end acceptance == if string from the start is found and remaing length is only spaces
+
 
 - файл/на консоль
+- разница по фидам
+
+- no spaces in the name of file, if exception during open file by openpxl ->
+- main in options selection
 
 -------------------------------------------------------------------------------------------------------------
 
 - statistics and vizualization
 - think about concurrency => array of different containers for parsing
-- no spaces in the name of file, if exception during open file by openpxl ->
+- 0.01 diff
+
 

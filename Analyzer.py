@@ -6,16 +6,36 @@ IDN = 4
 ERT = 5
 FLAG = 6
 
-def checkIfFormatting(ERT, IDN):
+
+def checkIfFormatting(ERT_local, IDN_local):
     try:
-        ERT_local = re.sub('[""]', '', ERT)
-        IDN_local = re.sub('[""]', '', IDN)
+        ERT_local_var = re.sub('[""]', '', ERT_local)
+        IDN_local_var = re.sub('[""]', '', IDN_local)
 
         if IDN != 'null' and ERT != 'null':
-            if ERT != IDN and float(ERT_local) == float(IDN_local):
+            if ERT != IDN and float(ERT_local_var) == float(IDN_local_var):
                 return True
     except:
         return False
+
+
+def checkIfSpacingIsAcceptable(IDN_local, ERT_local):
+    length_ERT = len(ERT_local)
+    length_IDN = len(IDN_local)
+
+    if (length_ERT + IDN_local.count(' ')) == length_IDN and length_IDN != 1:
+        # print(IDN_local + " " + ERT_local)
+        return True
+    return False
+
+def checkIfAcceptableMismatch(IDN_local, ERT_local, AcceptableGeneralMismatch):
+    ERT_local_var = re.sub('[""]', '', ERT_local)
+    IDN_local_var = re.sub('[""]', '', IDN_local)
+
+    if IDN_local_var == AcceptableGeneralMismatch[0][0] and ERT_local_var == \
+            AcceptableGeneralMismatch[0][1]:
+        return True
+    return False
 
 
 class Analyzer:
@@ -29,17 +49,12 @@ class Analyzer:
             lineToAnalyze = row.split(",")
 
             if lineToAnalyze[FLAG] == '!' and lineToAnalyze[FID] not in FIDsNotToBeAnalyzed:
-                # if lineToAnalyze[FID] == 'GEN_VAL1':
-                #     print(lineToAnalyze[IDN] + lineToAnalyze[ERT])
-
-                if lineToAnalyze[IDN] == AcceptableGeneralMismatch[0][0] and lineToAnalyze[ERT] == \
-                        AcceptableGeneralMismatch[0][1]:
+                if checkIfAcceptableMismatch(lineToAnalyze[IDN], lineToAnalyze[ERT], AcceptableGeneralMismatch):
                     continue
                 else:
-                    # if lineToAnalyze[FID] == 'GEN_VAL1':
-                    #     print(lineToAnalyze[IDN] + lineToAnalyze[ERT])
+                    if not checkIfFormatting(lineToAnalyze[IDN], lineToAnalyze[ERT]) and \
+                            checkIfSpacingIsAcceptable(lineToAnalyze[IDN], lineToAnalyze[ERT]) != True:
 
-                    if not checkIfFormatting(lineToAnalyze[IDN], lineToAnalyze[ERT]):
                         if lineToAnalyze[FID] not in self.list_of_fids_with_mismatch:
                             self.list_of_fids_with_mismatch.append(lineToAnalyze[FID])
                             self.dictVar[lineToAnalyze[FID]] = []
@@ -47,7 +62,8 @@ class Analyzer:
 
                         sublist = [lineToAnalyze[RIC], lineToAnalyze[IDN], lineToAnalyze[ERT]]
                         self.dictVar[lineToAnalyze[FID]].append(sublist)
-                        self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] + 1
+                        self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = self.dictVarQuantityOfMismatches[
+                                                                                   lineToAnalyze[FID]] + 1
 
     def getListOfFIDWithMismatch(self):
         for MismatchedFID in self.list_of_fids_with_mismatch:
@@ -76,7 +92,7 @@ class AnalyzerWrapper(object):
 
     def option_2(self):
         try:
-            #TODO: list of available options: 1 - FID, differnt function for convertion
+            # TODO: list of available options: 1 - FID, differnt function for convertion
             option = input("Please, enter FID for analysis.\n")
             return self.AnalyzerVar.getDetailsOnMismatchesForFID(option)
         except:
