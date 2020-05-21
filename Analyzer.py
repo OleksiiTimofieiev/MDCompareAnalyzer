@@ -32,12 +32,6 @@ class Analyzer:
     def getDetailsOnMismatchesForFID(self, SpecifiedFID):
         for MismatchedUpdate in self.dictVar[str(SpecifiedFID)]:
             print(MismatchedUpdate)
-        print()
-    # RIC IDN ERT
-    # use tuple
-    # FID# RIC IDN ERT
-    # FID - key, RIC IDN ERT
-    # write to file
 
 
 class Switcher(object):
@@ -57,10 +51,12 @@ class Switcher(object):
         return self.AnalyzerVar.getListOfFIDWithMismatch()
 
     def option_2(self):
-        #TODO: exception for the invalid key
-        option = input("Please, enter FID for analysis.\n")
-        #TODO: list of available options
-        return self.AnalyzerVar.getDetailsOnMismatchesForFID(option)
+        try:
+            option = input("Please, enter FID for analysis.\n")
+            #TODO: list of available options: 1 - FID, differnt function for convertion
+            return self.AnalyzerVar.getDetailsOnMismatchesForFID(option)
+        except:
+            print("Please, valid FID from options list should be selected.")
 
     def option_3(self):
         return quit()

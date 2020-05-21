@@ -33,7 +33,9 @@ def main(filename):
         while 1:
             menu()
             option = input()
+
             SwitcherVar.execute_option(option)
+
             continue
 
 
