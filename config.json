@@ -2,6 +2,12 @@
 	"writeResultsToFile" : false,
 	"writeResultsToExcel" : false,
 	"fileName" : "default",
+	"FIDsNotToBeAnalyzed" :
+	[
+		"DDS_DSO_ID",
+		"DSPLY_NAME",
+		"SPS_SP_RIC"
+	],
 	"generalAcceptableMismatch" :
 	[
 		{ "SRC1": "", "SRC2": "null" }

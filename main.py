@@ -7,8 +7,10 @@ from configsReader import ConfigsReader
 from fileReader import FileReader
 from Analyzer import Analyzer, Switcher
 
+ConfigsReaderVar = ConfigsReader()
+
 def menu():
-    print("Please,select an option: \n1. Print list of FIDs with problems;\n2. Stop execution of the program\n")
+    print("\nPlease,select an option: \n1. Print list of FIDs with problems;\n2. Stop execution of the program\n")
 
 def main(filename):
     if len(sys.argv) == 1:
@@ -18,13 +20,18 @@ def main(filename):
         print("Usage details: only on file can be selected.")
         sys.exit
     else:
-        AcceptableGeneralMismatchListVar = deque(ConfigsReader().getAcceptableGeneralMismatchList())
-        AcceptableGeneralSpecializedListVar = deque(ConfigsReader().getAcceptableSpecialysedMismatchList())
+        # AcceptableGeneralMismatchListVar =
+        AcceptableGeneralSpecializedListVar = deque(ConfigsReaderVar.getAcceptableSpecialysedMismatchList())
+        # FIDsNotToBeAnalyzed =
 
         print(AcceptableGeneralSpecializedListVar)
-        Data_to_analyze = FileReader(filename).getDataForAnalysis()
+        # Data_to_analyze =
 
-        SwitcherVar = Switcher(Data_to_analyze, AcceptableGeneralMismatchListVar)
+        SwitcherVar = Switcher(
+            FileReader(filename).getDataForAnalysis(),
+            deque(ConfigsReaderVar.getAcceptableGeneralMismatchList()),
+            list(ConfigsReaderVar.getFIDsNotToBeAnalyzed())
+        )
 
         while 1:
             menu()

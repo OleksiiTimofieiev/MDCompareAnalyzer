@@ -10,6 +10,7 @@ class ConfigsReader:
     acceptedSpecialized = deque()
     writeResultsToFile = False
     writeResultsToExcel = False
+    FIDsNotToBeAnalyzed = []
 
     def __init__(self):
         f = open(self.fileName)
@@ -24,6 +25,9 @@ class ConfigsReader:
             sublist = [x['FID'], x['SRC1'], x['SRC2']]
             self.acceptedSpecialized.append(sublist)
 
+        for x in self.data['FIDsNotToBeAnalyzed']:
+            self.FIDsNotToBeAnalyzed.append(x)
+
         self.writeResultsToFile = self.data['writeResultsToFile']
         self.writeResultsToExcel = self.data['writeResultsToExcel']
 
@@ -32,6 +36,9 @@ class ConfigsReader:
 
     def getAcceptableSpecialysedMismatchList(self):
         return self.acceptedSpecialized;
+
+    def getFIDsNotToBeAnalyzed(self):
+        return self.FIDsNotToBeAnalyzed;
 
     def getWriteResultsToFile(self):
         return self.writeResultsToFile;
