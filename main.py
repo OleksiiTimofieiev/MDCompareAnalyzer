@@ -7,10 +7,8 @@ from configsReader import ConfigsReader
 from fileReader import FileReader
 from Analyzer import Analyzer, Switcher
 
-
 def menu():
     print("Please,select an option: \n1. Print list of FIDs with problems;\n2. Stop execution of the program\n")
-
 
 def main(filename):
     if len(sys.argv) == 1:
