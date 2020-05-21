@@ -5,7 +5,7 @@ from collections import deque
 
 from configsReader import ConfigsReader
 from fileReader import FileReader
-from Analyzer import Analyzer, Switcher
+from Analyzer import AnalyzerWrapper
 
 ConfigsReaderVar = ConfigsReader()
 
@@ -22,7 +22,7 @@ def main(filename):
     else:
         #TODO: AcceptableGeneralSpecializedListVar = deque(ConfigsReaderVar.getAcceptableSpecialysedMismatchList())
 
-        SwitcherVar = Switcher(
+        AnalyzerWrapperVar = AnalyzerWrapper(
             FileReader(filename).getDataForAnalysis(),
             deque(ConfigsReaderVar.getAcceptableGeneralMismatchList()),
             list(ConfigsReaderVar.getFIDsNotToBeAnalyzed())
@@ -31,7 +31,7 @@ def main(filename):
         while 1:
             menu()
             option = input()
-            SwitcherVar.execute_option(option)
+            AnalyzerWrapperVar.execute_option(option)
             continue
 
 

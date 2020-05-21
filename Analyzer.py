@@ -33,7 +33,7 @@ class Analyzer:
             print(MismatchedUpdate)
 
 
-class Switcher(object):
+class AnalyzerWrapper(object):
 
     def __init__(self, Data_to_analyze, AcceptableGeneralMismatch, FIDsNotToBeAnalyzed):
         self.Data_to_analyze = Data_to_analyze

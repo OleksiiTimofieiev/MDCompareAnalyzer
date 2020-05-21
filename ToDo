@@ -1,50 +1,19 @@
-+ configs via json for acceptable mismatch
-+ configs via json to write results to file
-+ configs via json to write results to excel
 
-! think about concurrency => array of different containers for parsing
-! menu in loop
-
-second iteration:
-- load not all sheets as option
-
+TODO:
++ menu func
 + read json in constructor(during start)
 + file for analysis in command line
 + usage line
-- FIDs not to be analyzed
-- show RICs and mismatches
++ FIDs not to be analyzed
++ show RICs and mismatches
 - exceptions formatting acceptance
+- spaces in the end acceptance
+- файл/на консоль
 - no spaces in the name of file, if exception during open file by openpxl ->
-- menu func
-- select FIDs with not acceptable mismatches
 
-""
-"asdfasdf "
+-------------------------------------------------------------------------------------------------------------
 
-соответствие риков = тождественны ли множества риков
-тип несоответствия в файл/на консоль
-
-
-
-
-
-
-
-
-
-
-- all diff with all criteria, types of mismatch, RIC
-- options for fids;
-- one or all differencies;
-- check the type of mismatch
-- sort types of mismatches for FID
-- write results to file
-- выгрузить все по рику
-- print necessary FIDs according to RIC
-- add exception/exclude exception un runtime or fid
-- types of errors
 - statistics and vizualization
-- enum for the fields
-- if all acceptable, add to exceptions
-- write all data for RIC in separate file
+- think about concurrency => array of different containers for parsing
+
 
