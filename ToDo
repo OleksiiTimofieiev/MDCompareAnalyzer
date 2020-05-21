@@ -11,6 +11,7 @@ second iteration:
 + read json in constructor(during start)
 + file for analysis in command line
 + usage line
+- exceptions formatting acceptance
 - no spaces in the name of file, if exception during open file by openpxl ->
 - menu func
 - select FIDs with not acceptable mismatches
