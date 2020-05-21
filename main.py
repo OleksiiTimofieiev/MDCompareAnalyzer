@@ -20,9 +20,7 @@ def main(filename):
         print("Usage details: only on file can be selected.")
         sys.exit
     else:
-        AcceptableGeneralSpecializedListVar = deque(ConfigsReaderVar.getAcceptableSpecialysedMismatchList())
-
-        print(AcceptableGeneralSpecializedListVar)
+        #TODO: AcceptableGeneralSpecializedListVar = deque(ConfigsReaderVar.getAcceptableSpecialysedMismatchList())
 
         SwitcherVar = Switcher(
             FileReader(filename).getDataForAnalysis(),
@@ -33,9 +31,7 @@ def main(filename):
         while 1:
             menu()
             option = input()
-
             SwitcherVar.execute_option(option)
-
             continue
 
 
