@@ -10,7 +10,7 @@ from Analyzer import AnalyzerWrapper
 ConfigsReaderVar = ConfigsReader()
 
 def menu():
-    print("\nPlease,select an option: \n1. Print list of FIDs with problems;\n2. See diff for the specific FID;\n3. Stop execution of the program;\n")
+    print("\nPlease,select an option: \n1. Print list of FIDs with problems;\n2. See diff for the specific FID;\n3. Enter FID to be deleted from analysis\n4. Stop execution of the program;\n")
 
 def main(filename):
     if len(sys.argv) == 1:

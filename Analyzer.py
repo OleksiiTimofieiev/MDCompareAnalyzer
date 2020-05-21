@@ -77,6 +77,10 @@ class Analyzer:
         for MismatchedUpdate in self.dictVar[str(SpecifiedFID)]:
             print(MismatchedUpdate)
 
+    def deleteFIDFromAnalysis(self, FIDVar):
+        del(self.dictVar[FIDVar])
+        del(self.dictVarQuantityOfMismatches[FIDVar])
+        self.list_of_fids_with_mismatch.remove(FIDVar)
 
 class AnalyzerWrapper(object):
 
@@ -101,6 +105,12 @@ class AnalyzerWrapper(object):
             return self.AnalyzerVar.getDetailsOnMismatchesForFID(option)
         except:
             print("Please, valid FID from options list should be selected.")
-
     def option_3(self):
+        try:
+            # TODO: list of available options: 1 - FID, differnt function for convertion
+            option = input("Please, enter FID for deletion from analysis.\n")
+            return self.AnalyzerVar.deleteFIDFromAnalysis(option)
+        except:
+            print("Please, valid FID from options list should be selected.")
+    def option_4(self):
         return quit()

@@ -15,6 +15,9 @@ TODO:
 - no spaces in the name of file, if exception during open file by openpxl ->
 - main in options selection
 
+- set as fixed -> delete from dictionary
+del d[key]
+
 -------------------------------------------------------------------------------------------------------------
 
 - statistics and vizualization
