@@ -29,8 +29,16 @@ class Analyzer:
             lineToAnalyze = row.split(",")
 
             if lineToAnalyze[FLAG] == '!' and lineToAnalyze[FID] not in FIDsNotToBeAnalyzed:
-                if lineToAnalyze[IDN] != AcceptableGeneralMismatch[0][0] and lineToAnalyze[ERT] != \
+                # if lineToAnalyze[FID] == 'GEN_VAL1':
+                #     print(lineToAnalyze[IDN] + lineToAnalyze[ERT])
+
+                if lineToAnalyze[IDN] == AcceptableGeneralMismatch[0][0] and lineToAnalyze[ERT] == \
                         AcceptableGeneralMismatch[0][1]:
+                    continue
+                else:
+                    # if lineToAnalyze[FID] == 'GEN_VAL1':
+                    #     print(lineToAnalyze[IDN] + lineToAnalyze[ERT])
+
                     if not checkIfFormatting(lineToAnalyze[IDN], lineToAnalyze[ERT]):
                         if lineToAnalyze[FID] not in self.list_of_fids_with_mismatch:
                             self.list_of_fids_with_mismatch.append(lineToAnalyze[FID])
