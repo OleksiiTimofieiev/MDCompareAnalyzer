@@ -14,10 +14,8 @@ TODO:
 - файл/на консоль
 
 - no spaces in the name of file, if exception during open file by openpxl ->
-- main in options selection
+- main in options selection exception
 
-
-del d[key]
 
 -------------------------------------------------------------------------------------------------------------
 
