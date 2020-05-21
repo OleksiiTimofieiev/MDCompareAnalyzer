@@ -72,6 +72,7 @@ class Analyzer:
     def getListOfFIDWithMismatch(self):
         for MismatchedFID in self.list_of_fids_with_mismatch:
             print(MismatchedFID + " - " + str(self.dictVarQuantityOfMismatches[MismatchedFID]))
+        print("FIDs with mismatch -> " + str(self.list_of_fids_with_mismatch.__len__()))
 
     def getDetailsOnMismatchesForFID(self, SpecifiedFID):
         for MismatchedUpdate in self.dictVar[str(SpecifiedFID)]:
