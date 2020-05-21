@@ -28,12 +28,16 @@ def checkIfSpacingIsAcceptable(IDN_local, ERT_local):
         return True
     return False
 
+
 def checkIfAcceptableMismatch(IDN_local, ERT_local, AcceptableGeneralMismatch):
     ERT_local_var = re.sub('[""]', '', ERT_local)
     IDN_local_var = re.sub('[""]', '', IDN_local)
 
     if IDN_local_var == AcceptableGeneralMismatch[0][0] and ERT_local_var == \
             AcceptableGeneralMismatch[0][1]:
+        return True
+    elif IDN_local_var == AcceptableGeneralMismatch[1][0] and ERT_local_var == \
+            AcceptableGeneralMismatch[1][1]:
         return True
     return False
 

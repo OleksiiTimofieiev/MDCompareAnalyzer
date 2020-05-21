@@ -14,7 +14,8 @@
 	],
 	"generalAcceptableMismatch" :
 	[
-		{ "SRC1": "", "SRC2": "null" }
+		{ "SRC1": "", "SRC2": "null" },
+		{ "SRC1": "                                ", "SRC2": "null"}
 	],
 	"specializedAcceptableMismatch" :
 	[
