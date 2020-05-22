@@ -5,7 +5,7 @@ from collections import deque
 
 
 class ConfigsReader:
-    fileName = 'config.json'
+    fileName = './config/config.json'
     acceptedGeneral = deque()
     acceptedSpecialized = deque()
     writeResultsToFile = False
