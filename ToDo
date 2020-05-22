@@ -11,7 +11,10 @@ TODO:
 + spaces in the end acceptance == if string from the start is found and remaing length is only spaces
 + set as fixed -> delete from dictionary
 
-- файл/на консоль
+- write all diffs to plain text file -> FID == filename, CID folder pass to the command line arguments:
+1. create folder
+2. create files
+3. write to files: if already. do not write
 
 - no spaces in the name of file, if exception during open file by openpxl ->
 - main in options selection exception
