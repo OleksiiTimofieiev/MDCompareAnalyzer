@@ -26,4 +26,4 @@ TODO:
 - think about concurrency => array of different containers for parsing
 - 0.01 diff
 
-
+- license + gitignore
