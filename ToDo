@@ -18,6 +18,7 @@ TODO:
 
 - no spaces in the name of file, if exception during open file by openpxl ->
 - main in options selection exception
+- по ФИДам в листы экселя, консоль аутпут как опция
 
 
 -------------------------------------------------------------------------------------------------------------

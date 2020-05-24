@@ -45,9 +45,9 @@ class FileReader:
                 if counter_for_progress_bar % self.counter_for_progress_bar_limiter == 0:
                     sys.stdout.write("#")
                     sys.stdout.flush()
-                test = test + 1
-                if test == 100000:
-                    break
+                # test = test + 1
+                # if test == 100000:
+                #     break
                 counter_for_progress_bar = counter_for_progress_bar + 1
             sys.stdout.write("]\n")  # this ends the progress bar
         self.wb.close()

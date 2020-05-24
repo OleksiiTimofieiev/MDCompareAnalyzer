@@ -3,9 +3,9 @@
 import sys
 from collections import deque
 
-from src.configsReader import ConfigsReader
-from src.fileReader import FileReader
-from src.Analyzer import AnalyzerWrapper
+from configsReader import ConfigsReader
+from fileReader import FileReader
+from Analyzer import AnalyzerWrapper
 
 ConfigsReaderVar = ConfigsReader()
 
