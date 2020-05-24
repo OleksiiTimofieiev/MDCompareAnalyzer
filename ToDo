@@ -5,7 +5,7 @@ TODO:
 - workaround for bad excel from RECON
 - think about concurrency => array of different containers for parsing
 - no spaces in the name of file -> if exception during open file by openpxl
-- main in options selection exception
+- autoformat the width of the column
 - 0.01 diff
 - license + gitignore
 - deployment strategy
