@@ -1,6 +1,7 @@
 
 TODO:
 
+- add to fil CID name as program argument
 - workaround for bad excel from RECON
 - think about concurrency => array of different containers for parsing
 - no spaces in the name of file -> if exception during open file by openpxl
