@@ -34,9 +34,3 @@ class ConfigsReader:
 
     def getFIDsNotToBeAnalyzed(self):
         return self.FIDsNotToBeAnalyzed;
-
-    def getWriteResultsToFile(self):
-        return self.writeResultsToFile;
-
-    def getWriteResultsToExcel(self):
-        return self.writeResultsToExcel;
