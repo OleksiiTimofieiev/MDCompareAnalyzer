@@ -1,31 +1,10 @@
 
 TODO:
-+ menu func
-+ read json in constructor(during start)
-+ file for analysis in command line
-+ usage line
-+ FIDs not to be analyzed
-+ show RICs and mismatches
-+ formatting acceptance. if float === doubles in python are equal but string are different
-+ quantity of diffs
-+ spaces in the end acceptance == if string from the start is found and remaing length is only spaces
-+ set as fixed -> delete from dictionary
 
-- write all diffs to plain text file -> FID == filename, CID folder pass to the command line arguments:
-1. create folder
-2. create files
-3. write to files: if already. do not write
-
-- no spaces in the name of file, if exception during open file by openpxl ->
-- main in options selection exception
-- по ФИДам в листы экселя, консоль аутпут как опция
-
-
--------------------------------------------------------------------------------------------------------------
-
-- statistics and vizualization
+- workaround for bad excel from RECON
 - think about concurrency => array of different containers for parsing
+- no spaces in the name of file -> if exception during open file by openpxl
+- main in options selection exception
 - 0.01 diff
-
 - license + gitignore
 - deployment strategy

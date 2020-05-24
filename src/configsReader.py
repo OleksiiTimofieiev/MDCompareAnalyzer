@@ -8,8 +8,6 @@ class ConfigsReader:
     fileName = './config/config.json'
     acceptedGeneral = deque()
     acceptedSpecialized = deque()
-    writeResultsToFile = False
-    writeResultsToExcel = False
     FIDsNotToBeAnalyzed = []
 
     def __init__(self):
@@ -27,9 +25,6 @@ class ConfigsReader:
 
         for x in self.data['FIDsNotToBeAnalyzed']:
             self.FIDsNotToBeAnalyzed.append(x)
-
-        self.writeResultsToFile = self.data['writeResultsToFile']
-        self.writeResultsToExcel = self.data['writeResultsToExcel']
 
     def getAcceptableGeneralMismatchList(self):
         return self.acceptedGeneral;

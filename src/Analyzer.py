@@ -1,4 +1,5 @@
 import re
+import openpyxl
 
 RIC = 1
 FID = 3
@@ -69,19 +70,65 @@ class Analyzer:
                         self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = self.dictVarQuantityOfMismatches[
                                                                                    lineToAnalyze[FID]] + 1
 
+    def generateSheetsResultsForFIDs(self):
+        wb = openpyxl.load_workbook(filename='Result.xlsx')
+
+        sheetnames = wb.get_sheet_names()
+        # print(sheetnames)
+
+        for sheet in sheetnames:
+            if sheet != 'Sheet':
+                wbSheet = wb[sheet]
+                dataForSheet = self.dictVar[sheet]
+                wbSheet.cell(row=1, column=1).value = "RIC"
+                wbSheet.cell(row=1, column=2).value = "IDN"
+                wbSheet.cell(row=1, column=3).value = "ERT"
+                i = 2
+                for singleLine in dataForSheet:
+                    wbSheet.cell(row=i, column=1).value = singleLine[0]
+                    wbSheet.cell(row=i, column=2).value = singleLine[1]
+                    wbSheet.cell(row=i, column=3).value = singleLine[2]
+                    i = i + 1
+            else:
+                wbSheet = wb[sheet]
+                wbSheet.cell(row=1, column=1).value = "FID"
+                wbSheet.cell(row=1, column=2).value = "Mismatches quantity"
+                i = 2
+                for MismatchedFID in self.list_of_fids_with_mismatch:
+                    wbSheet.cell(row=i, column=1).value = MismatchedFID
+                    wbSheet.cell(row=i, column=2).value = self.dictVarQuantityOfMismatches[MismatchedFID]
+                    i = i + 1
+                wbSheet.title = "Statistics"
+        wb.save(filename='Result.xlsx')
+        wb.close()
+
     def getListOfFIDWithMismatch(self):
+        # for MismatchedFID in self.list_of_fids_with_mismatch:
+        #     print(MismatchedFID + " - " + str(self.dictVarQuantityOfMismatches[MismatchedFID]))
+        # print("FIDs with mismatch -> " + str(self.list_of_fids_with_mismatch.__len__()))
+        wb = openpyxl.Workbook()
+        wb.save(filename='Result.xlsx')
+
+        ws_name = r"Result.xlsx"
+        rb = openpyxl.load_workbook(ws_name)
+
         for MismatchedFID in self.list_of_fids_with_mismatch:
-            print(MismatchedFID + " - " + str(self.dictVarQuantityOfMismatches[MismatchedFID]))
-        print("FIDs with mismatch -> " + str(self.list_of_fids_with_mismatch.__len__()))
+            rb.create_sheet(MismatchedFID)
+
+        rb.save(ws_name)
+        rb.close()
+
+        self.generateSheetsResultsForFIDs()
 
     def getDetailsOnMismatchesForFID(self, SpecifiedFID):
         for MismatchedUpdate in self.dictVar[str(SpecifiedFID)]:
             print(MismatchedUpdate)
 
     def deleteFIDFromAnalysis(self, FIDVar):
-        del(self.dictVar[FIDVar])
-        del(self.dictVarQuantityOfMismatches[FIDVar])
+        del (self.dictVar[FIDVar])
+        del (self.dictVarQuantityOfMismatches[FIDVar])
         self.list_of_fids_with_mismatch.remove(FIDVar)
+
 
 class AnalyzerWrapper(object):
 
@@ -106,6 +153,7 @@ class AnalyzerWrapper(object):
             return self.AnalyzerVar.getDetailsOnMismatchesForFID(option)
         except:
             print("Please, valid FID from options list should be selected.")
+
     def option_3(self):
         try:
             # TODO: list of available options: 1 - FID, differnt function for convertion
@@ -113,5 +161,6 @@ class AnalyzerWrapper(object):
             return self.AnalyzerVar.deleteFIDFromAnalysis(option)
         except:
             print("Please, valid FID from options list should be selected.")
+
     def option_4(self):
         return quit()

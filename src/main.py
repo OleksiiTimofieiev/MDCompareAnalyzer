@@ -28,12 +28,12 @@ def main(filename):
             list(ConfigsReaderVar.getFIDsNotToBeAnalyzed())
         )
 
-        while 1:
+        # while 1:
             #TODO: exception for main
-            menu()
-            option = input()
-            AnalyzerWrapperVar.execute_option(option)
-            continue
+            # menu()
+            # option = input()
+        AnalyzerWrapperVar.execute_option(1)
+            # continue
 
 
 if __name__ == "__main__":

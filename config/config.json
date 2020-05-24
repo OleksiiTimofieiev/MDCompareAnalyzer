@@ -1,7 +1,4 @@
 {
-	"writeResultsToFile" : false,
-	"writeResultsToExcel" : false,
-	"fileName" : "default",
 	"FIDsNotToBeAnalyzed" :
 	[
 		"DDS_DSO_ID",
