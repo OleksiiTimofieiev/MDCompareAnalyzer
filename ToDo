@@ -3,6 +3,6 @@
 
 - think about concurrency => array of different containers for parsing
 - autoformat the width of the column
-- FIDs with formatting, spacing in the end, [-0.01, -0.001, -0.0001] to the separate file if they are present
+- FIDs with formatting, spacing in the end, [-0.01, -0.001, -0.0001] to the separate file with CID name if they are present
 - workaround for bad excel from RECON [resave the workbook with the new name, copy each sheet ot other]
 - deployment strategy
