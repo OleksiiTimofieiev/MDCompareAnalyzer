@@ -12,11 +12,16 @@ class FileReader:
     counter_for_progress_bar_limiter = limit
 
     def __init__(self, filenameExcel, CID):
+        try:
+            self.wb = openpyxl.load_workbook(filenameExcel, read_only=True)
+        except:
+            print("No such file or filename contains spaces")
+            sys.exit()
         self.filenameNew = 'Result_' + CID + '.xlsx'
         wb = openpyxl.Workbook()
         wb.save(filename=self.filenameNew)
         wb.close()
-        self.wb = openpyxl.load_workbook(filenameExcel, read_only=True)
+
         for x in self.wb.sheetnames:
             if x.find("Vertical") == 0:
                 self.sheets.append(x)
