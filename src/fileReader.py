@@ -11,9 +11,10 @@ class FileReader:
     row_quantity = 0
     counter_for_progress_bar_limiter = limit
 
-    def __init__(self, filenameExcel):
+    def __init__(self, filenameExcel, CID):
+        self.filenameNew = 'Result_' + CID + '.xlsx'
         wb = openpyxl.Workbook()
-        wb.save(filename='Result.xlsx')
+        wb.save(filename=self.filenameNew)
         wb.close()
         self.wb = openpyxl.load_workbook(filenameExcel, read_only=True)
         for x in self.wb.sheetnames:

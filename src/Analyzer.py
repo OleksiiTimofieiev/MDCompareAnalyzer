@@ -47,9 +47,9 @@ class Analyzer:
     dictVar = {}
     dictVarQuantityOfMismatches = {}
 
-    def __init__(self, Data_to_analyze, AcceptableGeneralMismatch, FIDsNotToBeAnalyzed):
+    def __init__(self, Data_to_analyze, AcceptableGeneralMismatch, FIDsNotToBeAnalyzed, CID):
         self.list_of_fids_with_mismatch = []
-
+        self.filenameToWrite = 'Result_' + CID + '.xlsx'
         for row in Data_to_analyze:
             lineToAnalyze = row.split(",")
 
@@ -71,7 +71,7 @@ class Analyzer:
                                                                                    lineToAnalyze[FID]] + 1
 
     def generateSheetsResultsForFIDs(self):
-        wb = openpyxl.load_workbook(filename='Result.xlsx')
+        wb = openpyxl.load_workbook(filename=self.filenameToWrite)
 
         sheetnames = wb.get_sheet_names()
         # print(sheetnames)
@@ -99,7 +99,7 @@ class Analyzer:
                     wbSheet.cell(row=i, column=2).value = self.dictVarQuantityOfMismatches[MismatchedFID]
                     i = i + 1
                 wbSheet.title = "Statistics"
-        wb.save(filename='Result.xlsx')
+        wb.save(filename=self.filenameToWrite)
         wb.close()
 
     def getListOfFIDWithMismatch(self):
@@ -107,7 +107,7 @@ class Analyzer:
         #     print(MismatchedFID + " - " + str(self.dictVarQuantityOfMismatches[MismatchedFID]))
         # print("FIDs with mismatch -> " + str(self.list_of_fids_with_mismatch.__len__()))
 
-        ws_name = r"Result.xlsx"
+        ws_name = self.filenameToWrite
         rb = openpyxl.load_workbook(ws_name)
 
         for MismatchedFID in self.list_of_fids_with_mismatch:
@@ -130,11 +130,11 @@ class Analyzer:
 
 class AnalyzerWrapper(object):
 
-    def __init__(self, Data_to_analyze, AcceptableGeneralMismatch, FIDsNotToBeAnalyzed):
+    def __init__(self, Data_to_analyze, AcceptableGeneralMismatch, FIDsNotToBeAnalyzed, CID):
         self.Data_to_analyze = Data_to_analyze
         self.AcceptableGeneralMismatch = AcceptableGeneralMismatch
         self.FIDsNotToBeAnalyzed = FIDsNotToBeAnalyzed
-        self.AnalyzerVar = Analyzer(Data_to_analyze, AcceptableGeneralMismatch, FIDsNotToBeAnalyzed)
+        self.AnalyzerVar = Analyzer(Data_to_analyze, AcceptableGeneralMismatch, FIDsNotToBeAnalyzed, CID)
 
     def execute_option(self, argument):
         method_name = 'option_' + str(argument)
@@ -146,7 +146,7 @@ class AnalyzerWrapper(object):
 
     def option_2(self):
         try:
-            # TODO: list of available options: 1 - FID, differnt function for convertion
+            # TODO: list of available options: 1 - FID, different function for convertion
             option = input("Please, enter FID for analysis.\n")
             return self.AnalyzerVar.getDetailsOnMismatchesForFID(option)
         except:
@@ -154,7 +154,7 @@ class AnalyzerWrapper(object):
 
     def option_3(self):
         try:
-            # TODO: list of available options: 1 - FID, differnt function for convertion
+            # TODO: list of available options: 1 - FID, different function for convertion
             option = input("Please, enter FID for deletion from analysis.\n")
             return self.AnalyzerVar.deleteFIDFromAnalysis(option)
         except:

@@ -12,13 +12,14 @@ ConfigsReaderVar = ConfigsReader()
 def menu():
     print("\nPlease,select an option: \n1. Print list of FIDs with problems;\n2. See diff for the specific FID;\n3. Enter FID to be deleted from analysis\n4. Stop execution of the program;\n")
 
-def main(filename):
+def main(filename, CID):
         #TODO: AcceptableGeneralSpecializedListVar = deque(ConfigsReaderVar.getAcceptableSpecialysedMismatchList())
 
         AnalyzerWrapperVar = AnalyzerWrapper(
-            FileReader(filename).getDataForAnalysis(),
+            FileReader(filename, CID).getDataForAnalysis(),
             deque(ConfigsReaderVar.getAcceptableGeneralMismatchList()),
-            list(ConfigsReaderVar.getFIDsNotToBeAnalyzed())
+            list(ConfigsReaderVar.getFIDsNotToBeAnalyzed()),
+            CID
         )
 
         # while 1:
@@ -33,9 +34,8 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("Usage details: please add filename and ContextID.")
         sys.exit
-        #TODO len(sys.argv) != 3
-    elif len(sys.argv) != 2:
+    elif len(sys.argv) != 3:
         print("Usage details: parameters are filename and ContextID.")
         sys.exit
     else:
-        main(sys.argv[1])
+        main(sys.argv[1], sys.argv[2])
