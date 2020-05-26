@@ -10,7 +10,7 @@ class FileReader:
     counter_for_progress_bar_limiter = 40000
 
     def __init__(self, filenameExcel):
-        wb = openpyxl.load_workbook(filename='Result.xlsx')
+        wb = openpyxl.Workbook()
         wb.save(filename='Result.xlsx')
         wb.close()
         self.wb = openpyxl.load_workbook(filenameExcel, read_only=True)

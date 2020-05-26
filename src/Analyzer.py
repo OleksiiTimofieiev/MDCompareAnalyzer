@@ -106,8 +106,6 @@ class Analyzer:
         # for MismatchedFID in self.list_of_fids_with_mismatch:
         #     print(MismatchedFID + " - " + str(self.dictVarQuantityOfMismatches[MismatchedFID]))
         # print("FIDs with mismatch -> " + str(self.list_of_fids_with_mismatch.__len__()))
-        wb = openpyxl.Workbook()
-        wb.save(filename='Result.xlsx')
 
         ws_name = r"Result.xlsx"
         rb = openpyxl.load_workbook(ws_name)
