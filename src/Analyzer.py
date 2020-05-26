@@ -6,6 +6,7 @@ FID = 3
 IDN = 4
 ERT = 5
 FLAG = 6
+MISMATCH = "!"
 
 
 def checkIfFormatting(ERT_local, IDN_local):
@@ -61,20 +62,20 @@ class Analyzer:
         for row in Data_to_analyze:
             lineToAnalyze = row.split(",")
 
-            if lineToAnalyze[FLAG] == '!':
-                if lineToAnalyze[FID] not in FIDsNotToBeAnalyzed:
-                    if not checkConditions(lineToAnalyze, AcceptableGeneralMismatch):
-                        if lineToAnalyze[FID] not in self.list_of_fids_with_mismatch:
-                            self.list_of_fids_with_mismatch.append(lineToAnalyze[FID])
-                            self.dictVar[lineToAnalyze[FID]] = []
-                            self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = 0
+            if len(lineToAnalyze) != 1:
+                if lineToAnalyze[FLAG] == MISMATCH:
+                    if lineToAnalyze[FID] not in FIDsNotToBeAnalyzed:
+                        if not checkConditions(lineToAnalyze, AcceptableGeneralMismatch):
+                            if lineToAnalyze[FID] not in self.list_of_fids_with_mismatch:
+                                self.list_of_fids_with_mismatch.append(lineToAnalyze[FID])
+                                self.dictVar[lineToAnalyze[FID]] = []
+                                self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = 0
 
-                        sublist = [lineToAnalyze[RIC], lineToAnalyze[IDN], lineToAnalyze[ERT]]
-                        self.dictVar[lineToAnalyze[FID]].append(sublist)
-                        self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] + 1
+                            sublist = [lineToAnalyze[RIC], lineToAnalyze[IDN], lineToAnalyze[ERT]]
+                            self.dictVar[lineToAnalyze[FID]].append(sublist)
+                            self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] + 1
             else:
                 continue
-
 
     def generateSheetsResultsForFIDs(self):
         wb = openpyxl.load_workbook(filename=self.filenameToWrite)
