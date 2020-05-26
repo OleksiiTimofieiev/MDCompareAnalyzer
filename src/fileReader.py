@@ -4,10 +4,12 @@ import sys
 import openpyxl
 import math
 
+limit = 40000
+
 class FileReader:
     sheets = []
     row_quantity = 0
-    counter_for_progress_bar_limiter = 40000
+    counter_for_progress_bar_limiter = limit
 
     def __init__(self, filenameExcel):
         wb = openpyxl.Workbook()
