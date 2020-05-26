@@ -13,13 +13,6 @@ def menu():
     print("\nPlease,select an option: \n1. Print list of FIDs with problems;\n2. See diff for the specific FID;\n3. Enter FID to be deleted from analysis\n4. Stop execution of the program;\n")
 
 def main(filename):
-    if len(sys.argv) == 1:
-        print("Usage details: please add filename.")
-        sys.exit
-    elif len(sys.argv) > 2:
-        print("Usage details: only on file can be selected.")
-        sys.exit
-    else:
         #TODO: AcceptableGeneralSpecializedListVar = deque(ConfigsReaderVar.getAcceptableSpecialysedMismatchList())
 
         AnalyzerWrapperVar = AnalyzerWrapper(
@@ -37,7 +30,15 @@ def main(filename):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    if len(sys.argv) == 1:
+        print("Usage details: please add filename and ContextID.")
+        sys.exit
+        #TODO len(sys.argv) != 3
+    elif len(sys.argv) != 2:
+        print("Usage details: parameters are filename and ContextID.")
+        sys.exit
+    else:
+        main(sys.argv[1])
 # _, a, b = sys.argv
 # for filename
 # except Exeptioin as e:
