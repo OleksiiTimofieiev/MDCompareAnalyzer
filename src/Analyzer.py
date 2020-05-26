@@ -13,23 +13,21 @@ def checkIfFormatting(ERT_local, IDN_local):
         ERT_local_var = re.sub('[""]', '', ERT_local)
         IDN_local_var = re.sub('[""]', '', IDN_local)
 
-        if IDN != 'null' and ERT != 'null':
-            if ERT != IDN and float(ERT_local_var) == float(IDN_local_var):
+        if ERT_local_var != 'null' and IDN_local_var != 'null':
+            if ERT_local_var != IDN_local_var and float(ERT_local_var) == float(IDN_local_var):
                 return True
     except:
         return False
-
 
 def checkIfSpacingIsAcceptable(IDN_local, ERT_local):
     length_ERT = len(ERT_local)
     length_IDN = len(IDN_local)
 
-    if (length_ERT + IDN_local.count(' ')) == length_IDN and length_IDN != 1:
-        # print(IDN_local + " " + ERT_local)
+    if (length_ERT + IDN_local.count(' ')) == length_IDN and length_IDN != 1 and IDN_local.count(' ') != 0:
         return True
     return False
 
-
+#TODO make it universal
 def checkIfAcceptableMismatch(IDN_local, ERT_local, AcceptableGeneralMismatch):
     ERT_local_var = re.sub('[""]', '', ERT_local)
     IDN_local_var = re.sub('[""]', '', IDN_local)
@@ -42,6 +40,15 @@ def checkIfAcceptableMismatch(IDN_local, ERT_local, AcceptableGeneralMismatch):
         return True
     return False
 
+def checkConditions(lineToAnalyze, AcceptableGeneralMismatch):
+    if checkIfAcceptableMismatch(lineToAnalyze[IDN], lineToAnalyze[ERT], AcceptableGeneralMismatch):
+        return True
+    elif checkIfFormatting(lineToAnalyze[IDN], lineToAnalyze[ERT]):
+        return True
+    elif checkIfSpacingIsAcceptable(lineToAnalyze[IDN], lineToAnalyze[ERT]):
+        return True
+    return False
+
 
 class Analyzer:
     dictVar = {}
@@ -50,16 +57,15 @@ class Analyzer:
     def __init__(self, Data_to_analyze, AcceptableGeneralMismatch, FIDsNotToBeAnalyzed, CID):
         self.list_of_fids_with_mismatch = []
         self.filenameToWrite = 'Result_' + CID + '.xlsx'
+
         for row in Data_to_analyze:
             lineToAnalyze = row.split(",")
 
-            if lineToAnalyze[FLAG] == '!' and lineToAnalyze[FID] not in FIDsNotToBeAnalyzed:
-                if checkIfAcceptableMismatch(lineToAnalyze[IDN], lineToAnalyze[ERT], AcceptableGeneralMismatch):
-                    continue
-                else:
-                    if not checkIfFormatting(lineToAnalyze[IDN], lineToAnalyze[ERT]) and \
-                            checkIfSpacingIsAcceptable(lineToAnalyze[IDN], lineToAnalyze[ERT]) != True:
-
+            if lineToAnalyze[FLAG] == '!':
+                if lineToAnalyze[FID] not in FIDsNotToBeAnalyzed:
+                    if not checkConditions(lineToAnalyze, AcceptableGeneralMismatch):
+                        if lineToAnalyze[FID] == 'EXPIR_DATE':
+                            print(lineToAnalyze[RIC] + " " + lineToAnalyze[IDN] + " " + lineToAnalyze[ERT])
                         if lineToAnalyze[FID] not in self.list_of_fids_with_mismatch:
                             self.list_of_fids_with_mismatch.append(lineToAnalyze[FID])
                             self.dictVar[lineToAnalyze[FID]] = []
@@ -67,8 +73,10 @@ class Analyzer:
 
                         sublist = [lineToAnalyze[RIC], lineToAnalyze[IDN], lineToAnalyze[ERT]]
                         self.dictVar[lineToAnalyze[FID]].append(sublist)
-                        self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = self.dictVarQuantityOfMismatches[
-                                                                                   lineToAnalyze[FID]] + 1
+                        self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] = self.dictVarQuantityOfMismatches[lineToAnalyze[FID]] + 1
+            else:
+                continue
+
 
     def generateSheetsResultsForFIDs(self):
         wb = openpyxl.load_workbook(filename=self.filenameToWrite)
@@ -103,10 +111,6 @@ class Analyzer:
         wb.close()
 
     def getListOfFIDWithMismatch(self):
-        # for MismatchedFID in self.list_of_fids_with_mismatch:
-        #     print(MismatchedFID + " - " + str(self.dictVarQuantityOfMismatches[MismatchedFID]))
-        # print("FIDs with mismatch -> " + str(self.list_of_fids_with_mismatch.__len__()))
-
         ws_name = self.filenameToWrite
         rb = openpyxl.load_workbook(ws_name)
 
