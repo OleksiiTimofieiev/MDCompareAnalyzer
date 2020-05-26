@@ -6,6 +6,5 @@
 - think about concurrency => array of different containers for parsing
 - no spaces in the name of file -> if exception during open file by openpxl
 - autoformat the width of the column
-- remove redundant code
 - license + gitignore
 - deployment strategy
