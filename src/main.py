@@ -39,22 +39,3 @@ if __name__ == "__main__":
         sys.exit
     else:
         main(sys.argv[1])
-# _, a, b = sys.argv
-# for filename
-# except Exeptioin as e:
-# 	print(type(e))
-
-# # Opening a file
-# file1 = open('test', 'w')
-#
-# # Writing a string to file
-# for x in z:
-#     file1.write(x + '\n')
-#
-# # Writing multiple strings
-# # at a time
-# # file1.writelines(L)
-#
-# # Closing file
-# file1.close()
-# # print(z)
