@@ -64,8 +64,6 @@ class Analyzer:
             if lineToAnalyze[FLAG] == '!':
                 if lineToAnalyze[FID] not in FIDsNotToBeAnalyzed:
                     if not checkConditions(lineToAnalyze, AcceptableGeneralMismatch):
-                        if lineToAnalyze[FID] == 'EXPIR_DATE':
-                            print(lineToAnalyze[RIC] + " " + lineToAnalyze[IDN] + " " + lineToAnalyze[ERT])
                         if lineToAnalyze[FID] not in self.list_of_fids_with_mismatch:
                             self.list_of_fids_with_mismatch.append(lineToAnalyze[FID])
                             self.dictVar[lineToAnalyze[FID]] = []
