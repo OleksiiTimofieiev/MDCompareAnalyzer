@@ -9,7 +9,7 @@ FLAG = 6
 MISMATCH = "!"
 
 
-def checkIfFormatting(ERT_local, IDN_local):
+def checkIfFormatting(IDN_local, ERT_local):
     try:
         ERT_local_var = re.sub('[""]', '', ERT_local)
         IDN_local_var = re.sub('[""]', '', IDN_local)
@@ -18,6 +18,26 @@ def checkIfFormatting(ERT_local, IDN_local):
             if ERT_local_var != IDN_local_var and float(ERT_local_var) == float(IDN_local_var):
                 return True
     except:
+        return False
+
+def checkIfMinorValueDifference(IDN_local, ERT_local):
+    try:
+        IDN_local_var = re.sub('[""]', '', IDN_local)
+        ERT_local_var = re.sub('[""]', '', ERT_local)
+
+        if ERT_local_var != 'null' and IDN_local_var != 'null':
+            if IDN_local_var != ERT_local_var and float(IDN_local_var) != float(ERT_local_var):
+                # print(IDN_local_var + " " + ERT_local_var)
+                tmp = round(float(ERT_local_var) - float(IDN_local_var), 2)
+                # print(tmp)
+                if tmp == 0.10 or tmp == -0.10:
+                    return True
+                elif tmp or tmp == -0.01:
+                    return True
+                elif tmp or tmp == -0.001:
+                    return True
+    except:
+        print("Exception in calculations.")
         return False
 
 def checkIfSpacingIsAcceptable(IDN_local, ERT_local):
@@ -47,6 +67,8 @@ def checkConditions(lineToAnalyze, AcceptableGeneralMismatch):
     elif checkIfFormatting(lineToAnalyze[IDN], lineToAnalyze[ERT]):
         return True
     elif checkIfSpacingIsAcceptable(lineToAnalyze[IDN], lineToAnalyze[ERT]):
+        return True
+    elif checkIfMinorValueDifference(lineToAnalyze[IDN], lineToAnalyze[ERT]):
         return True
     return False
 
