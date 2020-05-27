@@ -25,19 +25,21 @@ def checkIfMinorValueDifference(IDN_local, ERT_local):
         IDN_local_var = re.sub('[""]', '', IDN_local)
         ERT_local_var = re.sub('[""]', '', ERT_local)
 
-        if ERT_local_var != 'null' and IDN_local_var != 'null':
+        if ERT_local_var != 'null' and IDN_local_var != 'null' and len(IDN_local) != 1:
+            # print("check" + IDN_local_var + " " + ERT_local_var)
             if IDN_local_var != ERT_local_var and float(IDN_local_var) != float(ERT_local_var):
-                # print(IDN_local_var + " " + ERT_local_var)
+                print(IDN_local_var + " " + ERT_local_var)
                 tmp = round(float(ERT_local_var) - float(IDN_local_var), 2)
-                # print(tmp)
+                print(tmp)
                 if tmp == 0.10 or tmp == -0.10:
                     return True
-                elif tmp or tmp == -0.01:
+                elif tmp == 0.01 or tmp == -0.01:
                     return True
-                elif tmp or tmp == -0.001:
+                elif tmp == 0.001 or tmp == -0.001:
                     return True
     except:
-        print("Exception in calculations.")
+        # print("Exception in calculations.")
+        # print(ERT_local_var + " " + IDN_local_var)
         return False
 
 def checkIfSpacingIsAcceptable(IDN_local, ERT_local):
@@ -63,12 +65,16 @@ def checkIfAcceptableMismatch(IDN_local, ERT_local, AcceptableGeneralMismatch):
 
 def checkConditions(lineToAnalyze, AcceptableGeneralMismatch):
     if checkIfAcceptableMismatch(lineToAnalyze[IDN], lineToAnalyze[ERT], AcceptableGeneralMismatch):
+        # print("here1" + lineToAnalyze[FID])
         return True
     elif checkIfFormatting(lineToAnalyze[IDN], lineToAnalyze[ERT]):
+        # print("here2" + lineToAnalyze[FID])
         return True
     elif checkIfSpacingIsAcceptable(lineToAnalyze[IDN], lineToAnalyze[ERT]):
+        # print("here3" + lineToAnalyze[FID])
         return True
     elif checkIfMinorValueDifference(lineToAnalyze[IDN], lineToAnalyze[ERT]):
+        # print("here4" + lineToAnalyze[FID])
         return True
     return False
 
