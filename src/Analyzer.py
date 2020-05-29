@@ -28,9 +28,9 @@ def checkIfMinorValueDifference(IDN_local, ERT_local):
         if ERT_local_var != 'null' and IDN_local_var != 'null' and len(IDN_local) != 1:
             # print("check" + IDN_local_var + " " + ERT_local_var)
             if IDN_local_var != ERT_local_var and float(IDN_local_var) != float(ERT_local_var):
-                print(IDN_local_var + " " + ERT_local_var)
+                # print(IDN_local_var + " " + ERT_local_var)
                 tmp = round(float(ERT_local_var) - float(IDN_local_var), 2)
-                print(tmp)
+                # print(tmp)
                 if tmp == 0.10 or tmp == -0.10:
                     return True
                 elif tmp == 0.01 or tmp == -0.01:
@@ -105,6 +105,14 @@ class Analyzer:
             else:
                 continue
 
+    def columnAutoWidth(self, wbSheet, *val):
+        i = 65
+        for n in val:
+            col_width = wbSheet.column_dimensions[chr(i)].width
+            if len(str(n)) > col_width:
+                wbSheet.column_dimensions[chr(i)].width = len(str(n))
+            i += 1
+
     def generateSheetsResultsForFIDs(self):
         wb = openpyxl.load_workbook(filename=self.filenameToWrite)
 
@@ -113,6 +121,7 @@ class Analyzer:
 
         for sheet in sheetnames:
             if sheet != 'Sheet':
+                col_width = [0,0,0];
                 wbSheet = wb[sheet]
                 dataForSheet = self.dictVar[sheet]
                 wbSheet.cell(row=1, column=1).value = "RIC"
@@ -124,6 +133,7 @@ class Analyzer:
                     wbSheet.cell(row=i, column=2).value = singleLine[1]
                     wbSheet.cell(row=i, column=3).value = singleLine[2]
                     i = i + 1
+                    self.columnAutoWidth(wbSheet, singleLine[0], singleLine[1], singleLine[2])
             else:
                 wbSheet = wb[sheet]
                 wbSheet.cell(row=1, column=1).value = "FID"
@@ -133,6 +143,7 @@ class Analyzer:
                     wbSheet.cell(row=i, column=1).value = MismatchedFID
                     wbSheet.cell(row=i, column=2).value = self.dictVarQuantityOfMismatches[MismatchedFID]
                     i = i + 1
+                    self.columnAutoWidth(wbSheet, MismatchedFID, self.dictVarQuantityOfMismatches[MismatchedFID])
                 wbSheet.title = "Statistics"
         wb.save(filename=self.filenameToWrite)
         wb.close()
