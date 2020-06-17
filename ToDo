@@ -6,3 +6,4 @@
 - FIDs with formatting, spacing in the end, [-0.1, -0.01, -0.001] <= ERT - IDN or IDN - ERT to the separate file with CID name if they are present
 - workaround for bad excel from RECON [resave the workbook with the new name, copy each sheet ot other]
 - deployment strategy
+- all if options shall be configure in json
